@@ -5,7 +5,6 @@
  */
 
 require("./bootstrap");
-window.Dropzone = require("./dropzone-amd-module");
 
 window.Vue = require("vue");
 
@@ -35,14 +34,4 @@ const app = new Vue({
   el: "#app"
 });
 
-Dropzone.options.photosDropzone = {
-  paramName: "file",
-  maxFilesize: 10,
-  acceptedFiles: "image/*",
-  canceled: function(res) {
-    console.log("canceled: ", res);
-  },
-  canceledmultiple: function(res) {
-    console.log("cancelled multiple: ", res);
-  }
-};
+

@@ -7,11 +7,7 @@ use League\Flysystem\Filesystem;
 use Storage;
 class DOSpacesStorageServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     *
-     * @return void
-     */
+
     public function boot()
     {
       Storage::extend('do-spaces', function ($app, $config) {
@@ -29,11 +25,7 @@ class DOSpacesStorageServiceProvider extends ServiceProvider
           return new Filesystem(new AwsS3Adapter($client, $config["bucket"]));
       });
     }
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
+
     public function register()
     {
     }

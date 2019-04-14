@@ -12,10 +12,16 @@ use App\Photo;
 class UploadsController extends Controller
 {
     public function index() {
-        $photo = new Photo;
-        $photo->url = 'elGXHTo3cO9P4owFXEUduEkiv.png';
-        $photo->save();
-        return 'ok';
+
+        $base_url = env('SPACES_BASE_URL') . '/test/';
+        $photos = Photo::inRandomOrder()->limit(10)->get()->toArray();
+
+        $page_data = [
+            'photos' => $photos,
+            'base_url' => $base_url
+        ];
+
+        return view('index', $page_data);
     }
 
 
@@ -25,24 +31,18 @@ class UploadsController extends Controller
 
 
     public function doUpload(Request $request) {
-        // $path = $request->file('file')->store('public/photos');
-
-        $img = Image::make($request->file('file'))->resize(620, null, function ($constraint) {
+        $file = $request->file('file')
+        $img = Image::make($file)->resize(620, null, function ($constraint) {
             $constraint->aspectRatio();
         })->encode('jpg', '72');
 
         $filename = Str::random(25) . '.png';
-        // $path = $img->save("public/photos/{$filename}");
-
-        // $path = Storage::put("public/photos/{$filename}.png", (string) $img);
 
         Storage::disk('do-spaces')->put("test/{$filename}", (string) $img, 'public');
 
         $photo = new Photo;
         $photo->url = $filename;
         $photo->save();
-
-        // Log::info('file saved at path: ' . $path);
 
         return 'ok';
     }
