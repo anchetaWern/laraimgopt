@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Image;
 use Str;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +12,7 @@ class UploadsController extends Controller
 {
     public function index() {
 
-        $base_url = env('SPACES_BASE_URL') . '/test/';
+        $base_url = env('SPACES_BASE_URL') . '/photos/';
         $photos = Photo::inRandomOrder()->limit(10)->get()->toArray();
 
         $page_data = [
@@ -38,7 +37,7 @@ class UploadsController extends Controller
 
         $filename = Str::random(25) . '.png';
 
-        Storage::disk('do-spaces')->put("test/{$filename}", (string) $img, 'public');
+        Storage::disk('do-spaces')->put("photos/{$filename}", (string) $img, 'public');
 
         $photo = new Photo;
         $photo->url = $filename;

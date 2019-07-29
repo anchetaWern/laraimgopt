@@ -1,12 +1,6 @@
 window.Dropzone = require("./dropzone-amd-module");
 Dropzone.options.photosDropzone = {
-  paramName: "file",
-  maxFilesize: 10,
-  acceptedFiles: "image/*",
-  canceled: function(res) {
-    console.log("canceled: ", res);
-  },
-  canceledmultiple: function(res) {
-    console.log("cancelled multiple: ", res);
-  }
+  paramName: "file", // the name of the request parameter when the file is uploaded
+  maxFilesize: 10, // maximum size for each file in Mb
+  acceptedFiles: "image/*", // only accept image files
 };

@@ -14,4 +14,3 @@
 Route::get('/', 'UploadsController@index');
 Route::get('/upload', 'UploadsController@upload');
 Route::post('/upload', 'UploadsController@doUpload');
-//  class="dropzone" id="dropzone-form"
